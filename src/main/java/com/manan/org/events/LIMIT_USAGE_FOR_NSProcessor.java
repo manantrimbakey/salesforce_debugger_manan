@@ -17,7 +17,7 @@ public class LIMIT_USAGE_FOR_NSProcessor extends EventProcessorClass {
                 Matcher v = DebugAnalyser.masterPattern.matcher(lines);
                 boolean b = v.matches();
                 if (b) {
-                    DebugAnalyser.addEntryObject(generator, event, text.toString());
+                    DebugAnalyser.addEntryObject(generator, event, text.toString(),0);
                     app.process(lines, scanner);
                     return;
                 } else {
