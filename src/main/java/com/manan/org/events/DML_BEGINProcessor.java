@@ -12,16 +12,16 @@ public class DML_BEGINProcessor extends EventProcessorClass {
 
         try {
             if (m.matches()) {
-//                node.setData(m.group(2) + " operation on " + m.group(4) + " records of object " + m.group(3));
-                DebugAnalyser.startArrayObject(generator, m.group(2) + " operation on " + m.group(4) + " records of object " + m.group(3));
-                needToProcess = true;
+                int ln = 0;
                 try {
-
-
-//                    node.setLineNumber(Integer.parseInt(m.group(1)));
+                    ln = Integer.parseInt(m.group(1));
                 } catch (NumberFormatException e) {
                     // just ignore
                 }
+//                node.setData(m.group(2) + " operation on " + m.group(4) + " records of object " + m.group(3));
+                DebugAnalyser.startArrayObject(generator, m.group(2) + " operation on " + m.group(4) + " records of object " + m.group(3), ln);
+                needToProcess = true;
+
             }
         } catch (Exception e) {
             e.printStackTrace();

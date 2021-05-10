@@ -16,9 +16,8 @@ public class METHOD_ENTRYProcessor extends EventProcessorClass {
 
             Matcher m = eventVsPattern.get(event).matcher(eventData);
             if (m.matches()) {
-//                node.setLineNumber(Integer.parseInt(m.group(1)));
-//                node.setData(m.group(3));
-                DebugAnalyser.startArrayObject(generator, event, m.group(3));
+                int ln = Integer.parseInt(m.group(1));
+                DebugAnalyser.startArrayObject(generator, event, m.group(3), ln);
                 needToProcess = true;
             }
         } catch (Exception e) {

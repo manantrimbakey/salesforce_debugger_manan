@@ -18,7 +18,7 @@ public class CODE_UNIT_STARTEDProcessor extends EventProcessorClass {
                     /**
                      * Validation:Address:a2N0I00000JrqFR
                      */
-                    DebugAnalyser.startArrayObject(generator, event, resultantEventData);
+                    DebugAnalyser.startArrayObject(generator, event, resultantEventData, 0);
                     needToProcess = true;
                     String VALIDATION_RULE_PATTERN = "Validation:.+:.{15}";
                     Pattern p = Pattern.compile(VALIDATION_RULE_PATTERN);

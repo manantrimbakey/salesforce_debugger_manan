@@ -19,17 +19,13 @@ public class SOQL_EXECUTE_BEGINProcessor extends EventProcessorClass {
             if (m.matches()) {
                 try {
                     lineNumber = Integer.parseInt(m.group(1));
-//                    node.setLineNumber(lineNumber);
-//                    lineNumber = node.getLineNumber();
                 } catch (NumberFormatException e) {
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 soql = m.group(2);
-//                node.setData(soql);
-                // if (eventStack.size() > 0) {
-                DebugAnalyser.startArrayObject(generator,event,soql);
+                DebugAnalyser.startArrayObject(generator, event, soql, lineNumber);
                 String methodCall = json.toJson(eventStack) + "!@#$" + lineNumber;
                 if (soqlStatementVsCount.get(methodCall) != null) {
                     int count = soqlStatementVsCount.get(methodCall);

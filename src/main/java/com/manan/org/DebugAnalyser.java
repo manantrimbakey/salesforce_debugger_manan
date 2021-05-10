@@ -2,7 +2,6 @@ package com.manan.org;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.PrettyPrinter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 
 import java.io.File;
@@ -142,7 +141,7 @@ public class DebugAnalyser {
                 }
             } else {
                 // ANCHOR : process line which does not any event
-                DebugAnalyser.addEntryObject(generator, "text", line);
+                DebugAnalyser.addEntryObject(generator, "text", line, 0);
             }
         }
     }
@@ -207,10 +206,11 @@ public class DebugAnalyser {
         return helper.needToProcess;
     }
 
-    public static void addEntryObject(JsonGenerator generator, String event, String eventData) throws IOException {
+    public static void addEntryObject(JsonGenerator generator, String event, String eventData, int lineNumber) throws IOException {
         generator.writeStartObject();
         generator.writeFieldName(event);
         generator.writeString(eventData);
+        generator.writeNumberField("ln",lineNumber);
         generator.writeEndObject();
     }
 
@@ -219,14 +219,16 @@ public class DebugAnalyser {
         generator.writeEndObject();
     }
 
-    public static void startArrayObject(JsonGenerator generator, String event, String eventData) throws IOException {
+    public static void startArrayObject(JsonGenerator generator, String event, String eventData, int lineNumber) throws IOException {
         generator.writeStartObject();
+        generator.writeNumberField("ln",lineNumber);
         generator.writeFieldName(event + " " + eventData);
         generator.writeStartArray();
     }
 
-    public static void startArrayObject(JsonGenerator generator, String event) throws IOException {
+    public static void startArrayObject(JsonGenerator generator, String event, int lineNumber) throws IOException {
         generator.writeStartObject();
+        generator.writeNumberField("ln",lineNumber);
         generator.writeFieldName(event);
         generator.writeStartArray();
     }
@@ -275,7 +277,7 @@ public class DebugAnalyser {
             }
         } else {
             // ANCHOR : process line which does not any event
-            DebugAnalyser.addEntryObject(generator, "text", line);
+            DebugAnalyser.addEntryObject(generator, "text", line, 0);
         }
     }
 }
