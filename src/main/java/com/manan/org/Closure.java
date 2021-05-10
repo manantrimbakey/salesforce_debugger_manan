@@ -15,6 +15,5 @@ public class Closure {
         this.closures.add("CONSTRUCTOR_EXIT");
         this.closures.add("DML_END");
         this.closures.add("SYSTEM_METHOD_EXIT");
-        this.closures.add("SYSTEM_MODE_EXIT");
     }
 }

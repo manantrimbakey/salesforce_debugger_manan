@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Map;
 
 public class EventProcessorClass {
 
@@ -19,6 +22,64 @@ public class EventProcessorClass {
     public DebugAnalyser app;
     public Boolean needToProcess = true;
     public JsonGenerator generator;
+    public String resultantEventData;
+    public String resultantEvent;
+    public String event;
+    public String eventData;
+    public String fullString;
+    public Map<String,Pattern> eventVsPattern;
+
+    public String getResultantEventData() {
+        return resultantEventData;
+    }
+
+    public void setResultantEventData(String resultantEventData) {
+        this.resultantEventData = resultantEventData;
+    }
+
+    public void setResultantEvent(String resultantEvent) {
+        this.resultantEvent = resultantEvent;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
+    }
+
+    public String getEventData() {
+        return eventData;
+    }
+
+    public void setEventData(String eventData) {
+        this.eventData = eventData;
+    }
+
+    public String getFullString() {
+        return fullString;
+    }
+
+    public void setFullString(String fullString) {
+        this.fullString = fullString;
+    }
+
+    public String getResultantEvenData() {
+        return resultantEventData;
+    }
+
+    public void setResultantEvenData(String resultantEventData) {
+        this.resultantEventData = resultantEventData;
+    }
+
+    public String getResultantEvent() {
+        return resultantEvent;
+    }
+
+    public void setResultantEven(String resultantEvent) {
+        this.resultantEvent = resultantEvent;
+    }
 
     public JsonGenerator getGenerator() {
         return generator;

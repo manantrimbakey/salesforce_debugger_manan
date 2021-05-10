@@ -15,6 +15,5 @@ public class Opening {
         this.openers.add("DML_BEGIN");
         this.openers.add("SOQL_EXECUTE_BEGIN");
         this.openers.add("SYSTEM_METHOD_ENTRY");
-        this.openers.add("SYSTEM_MODE_ENTER");
     }
 }

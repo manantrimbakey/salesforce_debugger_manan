@@ -1,17 +1,16 @@
 package com.manan.org.server;
 
 import com.manan.org.DebugAnalyser;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.StringWriter;
 
 @RestController
 public class AnalyseRequestProcessor {
 
-    @GetMapping("/analyse")
-    public String analyse(@RequestParam(value = "path", defaultValue = "C:\\Users\\manan\\Desktop\\Desktop Files\\log1.log") String path) {
+    @RequestMapping(value = "/analyse", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String analyse(@RequestParam(value = "path", defaultValue = "C:\\Users\\manan\\Downloads\\apex-07L9D000007G1DEUA0.log") String path) {
         DebugAnalyser da= new DebugAnalyser();
         StringWriter st = da.analyseLog(path);
         return st.toString();

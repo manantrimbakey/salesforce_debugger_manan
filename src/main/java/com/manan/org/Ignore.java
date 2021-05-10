@@ -20,8 +20,8 @@ public class Ignore {
         this.ignores.add("Database.QueryLocator.iterator()");
         this.ignores.add("Database.QueryLocatorIterator.hasNext()");
         this.ignores.add("Database.QueryLocatorIterator.next()");
-        // this.ignores.add("SYSTEM_MODE_ENTER");
-        // this.ignores.add("SYSTEM_MODE_EXIT");
+        this.ignores.add("SYSTEM_MODE_ENTER");
+        this.ignores.add("SYSTEM_MODE_EXIT");
         this.ignores.add("System.JSON.deserialize(String, System.Type)");
     }
 }
