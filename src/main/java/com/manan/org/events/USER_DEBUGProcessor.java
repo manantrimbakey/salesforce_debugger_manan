@@ -23,7 +23,14 @@ public class USER_DEBUGProcessor extends EventProcessorClass {
                     Matcher v = DebugAnalyser.masterPattern.matcher(lines);
                     boolean b = v.matches();
                     if (b) {
-                        DebugAnalyser.addEntryObject(generator, event, json.toJson(debugLine.toString()));
+                        generator.writeStartObject();
+                        generator.writeStringField(event, json.toJson(debugLine.toString()));
+                        try {
+                            generator.writeNumberField("ln", Integer.parseInt(m.group(1)));
+                        } catch (NumberFormatException e) {
+
+                        }
+                        generator.writeEndObject();
                         app.process(lines, scanner);
                         return;
                     } else {
