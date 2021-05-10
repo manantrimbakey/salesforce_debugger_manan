@@ -16,20 +16,21 @@ public class USER_DEBUGProcessor extends EventProcessorClass {
             StringBuilder debugLine;
             Pattern p = eventVsPattern.get("USER_DEBUG");
             Matcher m = p.matcher(eventData);
-            int ln = 0;
             if (m.matches()) {
-                try {
-                    ln = Integer.parseInt(m.group(1));
-                } catch (NumberFormatException e) {
-
-                }
                 debugLine = new StringBuilder(m.group(2));
                 while (scanner.hasNextLine()) {
                     String lines = scanner.nextLine();
                     Matcher v = DebugAnalyser.masterPattern.matcher(lines);
                     boolean b = v.matches();
                     if (b) {
-                        DebugAnalyser.addEntryObject(generator, event, json.toJson(debugLine.toString()), ln);
+                        generator.writeStartObject();
+                        generator.writeStringField(event, json.toJson(debugLine.toString()));
+                        try {
+                            generator.writeNumberField("ln", Integer.parseInt(m.group(1)));
+                        } catch (NumberFormatException e) {
+
+                        }
+                        generator.writeEndObject();
                         app.process(lines, scanner);
                         return;
                     } else {

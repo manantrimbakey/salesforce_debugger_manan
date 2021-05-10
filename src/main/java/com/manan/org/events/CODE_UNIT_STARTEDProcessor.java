@@ -52,22 +52,21 @@ public class CODE_UNIT_STARTEDProcessor extends EventProcessorClass {
                     return;
                 } else if (v.group(2).equalsIgnoreCase("VALIDATION_PASS")) {
                     validationText += "\n" + "Validation Passed";
+                } else if (v.group(2).equalsIgnoreCase("VALIDATION_FAIL")) {
+                    validationText += "\n" + "Validation Fail";
                 } else if (v.group(2).equalsIgnoreCase("VALIDATION_RULE")) {
                     Pattern valRulePattern = Pattern.compile("\\|.{15}\\|(.+)");
                     Matcher tempMatch = valRulePattern.matcher(v.group(3));
                     if (tempMatch.matches()) {
                         validationText += "\n" + "Validation Rule Name: " + tempMatch.group(1);
-//                        generator.writeStringField("VALIDATION",validationText);
                     }
                 } else {
                     if (v.groupCount() == 3) {
                         validationText += "\n" + v.group(3);
-//                        generator.writeStringField("VALIDATION",validationText);
                     }
                 }
             } else {
                 validationText += "\n" + line;
-//                generator.writeStringField("VALIDATION",validationText);
             }
         }
     }
