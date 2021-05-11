@@ -1,8 +1,7 @@
-package com.manan.org;
+package com.manan.org.analyse;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -79,7 +78,7 @@ public class DebugAnalyser {
             JsonFactory factory = new JsonFactory();
             StringWriter jsonObjectWriter = new StringWriter();
             generator = factory.createGenerator(jsonObjectWriter);
-            generator.setPrettyPrinter(new DefaultPrettyPrinter());
+//            generator.setPrettyPrinter(new DefaultPrettyPrinter());
             generator.writeStartObject();
             generator.writeFieldName("log");
             generator.writeStartArray();
@@ -98,50 +97,8 @@ public class DebugAnalyser {
     public void process(Scanner scanner) throws Exception {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            Matcher m = masterPattern.matcher(line);
-            boolean b = m.matches();
-            if (b) {
-                String uniqueId = m.group(1);
-                String event = m.group(2);
-                String eventText = m.group(3);
-                if (ignoreStack.size() > 0 && !(!event.isBlank() && ignoreStack.size() > 0
-                        && REGEX_DATA.closingVsOpening.get(event) != null
-                        && REGEX_DATA.closingVsOpening.get(event).equalsIgnoreCase(ignoreStack.peek()))) {
-                    // ANCHOR : handle ignored lines
-                    handleIgnoreLine(event, eventText, uniqueId, line, generator, scanner);
-                } else if (checkForIgnore(line)) {
-                    if (matchToken(event, eventText, OPENING_TOKENS)) {
-                        // ANCHOR : add to ignore stack if the keyword is in ignore list and is opening
-                        // tag
-                        if (IGNORE_LIST.contains(event)) {
-                            ignoreStack.push(event);
-                        }
-                    } else if (!event.isBlank() && ignoreStack.size() > 0
-                            && REGEX_DATA.closingVsOpening.get(event) != null
-                            && REGEX_DATA.closingVsOpening.get(event).equalsIgnoreCase(ignoreStack.peek())) {
-                        // ANCHOR : pop from ignore stack if the event is in ignore and is closing of
-                        // top element
-                        // resetFlags(event);
-                        ignoreStack.pop();
-                    } else {
-                        // ANCHOR : handle ignored lines
-                    }
-                } else if (matchToken(event, eventText, OPENING_TOKENS)) {
-                    // ANCHOR : if event is any event opening tag
-                    if (handleSpecificNode(event, eventText, uniqueId, line, generator, scanner)) {
-                        this.process(scanner);
-                    }
-                } else if (matchToken(event, eventText, CLOSING_TOKENS)) {
-                    // ANCHOR : if event is any event closing tag
-                    handleSpecificNode(event, eventText, uniqueId, line, generator, scanner);
-                    return;
-                } else {
-                    // ANCHOR : if event is not any opening and closing tag
-                    handleSpecificNode(event, eventText, uniqueId, line, generator, scanner);
-                }
-            } else {
-                // ANCHOR : process line which does not any event
-                DebugAnalyser.addEntryObject(generator, "text", line, 0);
+            if (line != null && !line.isBlank()) {
+                process(line, scanner, generator);
             }
         }
     }
@@ -210,7 +167,7 @@ public class DebugAnalyser {
         generator.writeStartObject();
         generator.writeFieldName(event);
         generator.writeString(eventData);
-        generator.writeNumberField("ln",lineNumber);
+        generator.writeNumberField("ln", lineNumber);
         generator.writeEndObject();
     }
 
@@ -221,19 +178,19 @@ public class DebugAnalyser {
 
     public static void startArrayObject(JsonGenerator generator, String event, String eventData, int lineNumber) throws IOException {
         generator.writeStartObject();
-        generator.writeNumberField("ln",lineNumber);
+        generator.writeNumberField("ln", lineNumber);
         generator.writeFieldName(event + " " + eventData);
         generator.writeStartArray();
     }
 
     public static void startArrayObject(JsonGenerator generator, String event, int lineNumber) throws IOException {
         generator.writeStartObject();
-        generator.writeNumberField("ln",lineNumber);
+        generator.writeNumberField("ln", lineNumber);
         generator.writeFieldName(event);
         generator.writeStartArray();
     }
 
-    public void process(String line, Scanner scanner) throws Exception {
+    public void process(String line, Scanner scanner, JsonGenerator generator) throws Exception {
         Matcher m = masterPattern.matcher(line);
         boolean b = m.matches();
         if (b) {
@@ -244,7 +201,7 @@ public class DebugAnalyser {
                     && REGEX_DATA.closingVsOpening.get(event) != null
                     && REGEX_DATA.closingVsOpening.get(event).equalsIgnoreCase(ignoreStack.peek()))) {
                 // ANCHOR : handle ignored lines
-                handleIgnoreLine(event, eventText, uniqueId, line, generator, scanner);
+                handleIgnoreLine(event, eventText, uniqueId, line, this.generator, scanner);
             } else if (checkForIgnore(line)) {
                 if (matchToken(event, eventText, OPENING_TOKENS)) {
                     // ANCHOR : add to ignore stack if the keyword is in ignore list and is opening
@@ -264,20 +221,20 @@ public class DebugAnalyser {
                 }
             } else if (matchToken(event, eventText, OPENING_TOKENS)) {
                 // ANCHOR : if event is any event opening tag
-                if (handleSpecificNode(event, eventText, uniqueId, line, generator, scanner)) {
+                if (handleSpecificNode(event, eventText, uniqueId, line, this.generator, scanner)) {
                     this.process(scanner);
                 }
             } else if (matchToken(event, eventText, CLOSING_TOKENS)) {
                 // ANCHOR : if event is any event closing tag
-                handleSpecificNode(event, eventText, uniqueId, line, generator, scanner);
+                handleSpecificNode(event, eventText, uniqueId, line, this.generator, scanner);
                 return;
             } else {
                 // ANCHOR : if event is not any opening and closing tag
-                handleSpecificNode(event, eventText, uniqueId, line, generator, scanner);
+                handleSpecificNode(event, eventText, uniqueId, line, this.generator, scanner);
             }
         } else {
             // ANCHOR : process line which does not any event
-            DebugAnalyser.addEntryObject(generator, "text", line, 0);
+            DebugAnalyser.addEntryObject(this.generator, "text", line, 0);
         }
     }
 }

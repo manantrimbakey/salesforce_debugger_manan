@@ -1,6 +1,6 @@
 package com.manan.org.server;
 
-import com.manan.org.DebugAnalyser;
+import com.manan.org.analyse.DebugAnalyser;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.StringWriter;

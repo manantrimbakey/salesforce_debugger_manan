@@ -2,8 +2,8 @@ package com.manan.org.events;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.manan.org.DebugAnalyser;
-import com.manan.org.EventProcessorClass;
+import com.manan.org.analyse.DebugAnalyser;
+import com.manan.org.analyse.EventProcessorClass;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,16 +22,15 @@ public class USER_DEBUGProcessor extends EventProcessorClass {
                     String lines = scanner.nextLine();
                     Matcher v = DebugAnalyser.masterPattern.matcher(lines);
                     boolean b = v.matches();
-                    if (b) {
-                        generator.writeStartObject();
-                        generator.writeStringField(event, json.toJson(debugLine.toString()));
-                        try {
-                            generator.writeNumberField("ln", Integer.parseInt(m.group(1)));
-                        } catch (NumberFormatException e) {
+                    int ln = 0;
+                    try {
+                        ln = Integer.parseInt(m.group(1));
+                    } catch (NumberFormatException ignored) {
 
-                        }
-                        generator.writeEndObject();
-                        app.process(lines, scanner);
+                    }
+                    if (b) {
+                        DebugAnalyser.addEntryObject(generator,event, json.toJson(debugLine.toString()), ln);
+                        app.process(lines, scanner, generator);
                         return;
                     } else {
                         debugLine.append("\n" + lines);

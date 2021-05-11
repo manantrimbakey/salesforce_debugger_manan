@@ -1,7 +1,7 @@
 package com.manan.org.events;
 
-import com.manan.org.DebugAnalyser;
-import com.manan.org.EventProcessorClass;
+import com.manan.org.analyse.DebugAnalyser;
+import com.manan.org.analyse.EventProcessorClass;
 
 import java.io.IOException;
 import java.util.regex.Matcher;

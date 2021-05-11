@@ -1,4 +1,4 @@
-package com.manan.org;
+package com.manan.org.analyse;
 
 import java.util.*;
 import java.util.regex.Pattern;

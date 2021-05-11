@@ -1,7 +1,7 @@
 package com.manan.org.events;
 
-import com.manan.org.DebugAnalyser;
-import com.manan.org.EventProcessorClass;
+import com.manan.org.analyse.DebugAnalyser;
+import com.manan.org.analyse.EventProcessorClass;
 
 import java.util.regex.Matcher;
 
@@ -14,7 +14,7 @@ public class STATIC_VARIABLE_LISTProcessor extends EventProcessorClass {
                 Matcher v = DebugAnalyser.masterPattern.matcher(lines);
                 boolean b = v.matches();
                 if (b) {
-                    app.process(lines, scanner);
+                    app.process(lines, scanner, generator);
                     return;
                 } else {
                 }

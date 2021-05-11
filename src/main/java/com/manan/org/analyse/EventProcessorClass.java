@@ -1,4 +1,4 @@
-package com.manan.org;
+package com.manan.org.analyse;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Map;
 
@@ -162,6 +161,10 @@ public class EventProcessorClass {
     }
 
     public void execute() {
-
+        try {
+            DebugAnalyser.addEntryObject(generator, event, eventData, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

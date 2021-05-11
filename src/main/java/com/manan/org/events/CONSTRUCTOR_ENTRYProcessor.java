@@ -1,7 +1,7 @@
 package com.manan.org.events;
 
-import com.manan.org.DebugAnalyser;
-import com.manan.org.EventProcessorClass;
+import com.manan.org.analyse.DebugAnalyser;
+import com.manan.org.analyse.EventProcessorClass;
 
 import java.util.regex.Matcher;
 
@@ -11,12 +11,10 @@ public class CONSTRUCTOR_ENTRYProcessor extends EventProcessorClass {
         Matcher m = eventVsPattern.get(event).matcher(eventData);
         if (m.matches()) {
             try {
-//                node.setLineNumber(Integer.parseInt(m.group(1)));
-//                node.setData(m.group(3));
                 int ln = 0;
                 try {
                     ln = Integer.parseInt(m.group(1));
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException ignored) {
 
                 }
                 DebugAnalyser.startArrayObject(generator,event,m.group(3), ln);
