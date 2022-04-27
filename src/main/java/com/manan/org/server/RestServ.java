@@ -8,16 +8,27 @@ import java.util.HashMap;
 @RestController
 public class RestServ {
 
-    @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
+    @SuppressWarnings("unchecked")
+    @PostMapping(path = "/analyse", consumes = "application/json", produces = "application/json")
     public Object analyse(@RequestBody Object jsonData) {
+        String result = "";
         try {
             DebugAnalyser da = new DebugAnalyser();
-            HashMap<String, Object> h = (HashMap<String, Object>) jsonData;
-            StringWriter st = da.analyseLogPost((String) h.get("data"));
-            return st.toString();
+            if (jsonData instanceof HashMap) {
+                HashMap<String, Object> h = (HashMap<String, Object>) jsonData;
+                StringWriter st = da.analyseLogPost((String) h.get("data"));
+                result = st.toString();
+            } else {
+                result = "invalid data";
+            }
         } catch (Exception e) {
-            return e.getMessage() + " " + e.getStackTrace();
+            result = e.getMessage() + " " + e.getStackTrace();
         }
+        return result;
+    }
 
+    @GetMapping(path = "/")
+    public Object greeting() {
+        return "greetings";
     }
 }

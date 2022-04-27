@@ -8,10 +8,11 @@ import java.io.StringWriter;
 @RestController
 public class AnalyseRequestProcessor {
 
-    @RequestMapping(value = "/analyse", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String analyse(@RequestParam(value = "path", defaultValue = "C:\\Users\\manan\\Downloads\\apex-07L9D000007G1DEUA0.log") String path) {
-        DebugAnalyser da= new DebugAnalyser();
+    public String analyse(
+            @RequestParam(value = "path", defaultValue = "C:\\Users\\manan\\Downloads\\apex-07L9D000007G1DEUA0.log") String path) {
+        DebugAnalyser da = new DebugAnalyser();
         StringWriter st = da.analyseLog(path);
         return st.toString();
     }
