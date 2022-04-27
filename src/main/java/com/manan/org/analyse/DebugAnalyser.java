@@ -78,7 +78,26 @@ public class DebugAnalyser {
             JsonFactory factory = new JsonFactory();
             StringWriter jsonObjectWriter = new StringWriter();
             generator = factory.createGenerator(jsonObjectWriter);
-//            generator.setPrettyPrinter(new DefaultPrettyPrinter());
+            generator.writeStartObject();
+            generator.writeFieldName("log");
+            generator.writeStartArray();
+            this.process(scanner);
+            generator.writeEndArray();
+            generator.writeEndObject();
+            generator.close();
+            return jsonObjectWriter;
+        } catch (Exception e) {
+            StringWriter jsonObjectWriter = new StringWriter();
+            e.printStackTrace();
+            return jsonObjectWriter;
+        }
+    }
+
+    public StringWriter analyseLogPost(String source) {
+        try (Scanner scanner = new Scanner(source)) {
+            JsonFactory factory = new JsonFactory();
+            StringWriter jsonObjectWriter = new StringWriter();
+            generator = factory.createGenerator(jsonObjectWriter);
             generator.writeStartObject();
             generator.writeFieldName("log");
             generator.writeStartArray();
@@ -214,7 +233,6 @@ public class DebugAnalyser {
                         && REGEX_DATA.closingVsOpening.get(event).equalsIgnoreCase(ignoreStack.peek())) {
                     // ANCHOR : pop from ignore stack if the event is in ignore and is closing of
                     // top element
-                    // resetFlags(event);
                     ignoreStack.pop();
                 } else {
                     // ANCHOR : handle ignored lines
