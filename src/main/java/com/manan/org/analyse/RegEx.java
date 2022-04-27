@@ -77,6 +77,11 @@ public class RegEx {
          * \|\[(.+)\]\|Bytes:.+
          */
         this.eventVsRegEx.put("HEAP_ALLOCATE", "\\|\\[(.+)\\]\\|Bytes:.+");
+        
+        /**
+         * \|\[(\d+)\]\|([\w_.\d]+)\|(.+)
+         */
+        this.eventVsRegEx.put("VARIABLE_ASSIGNMENT", "\\|\\[(\\d+)\\]\\|([\\w_\\.\\d]+)\\|(.+)");
     }
 
     public void initTagContainer() {

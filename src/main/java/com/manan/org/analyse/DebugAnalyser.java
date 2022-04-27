@@ -63,7 +63,8 @@ public class DebugAnalyser {
     }
 
     public static void main(String[] args) {
-        try (FileWriter fw = new FileWriter(new File("C:\\Users\\manan\\Desktop\\Desktop Files\\apex-07L9D000007G1DEUA0__json.json"))) {
+        try (FileWriter fw = new FileWriter(
+                new File("C:\\Users\\manan\\Desktop\\Desktop Files\\apex-07L9D000007G1DEUA0__json.json"))) {
             DebugAnalyser da = new DebugAnalyser();
             StringWriter st = da.analyseLog("C:\\Users\\manan\\Downloads\\apex-07L9D000007G1DEUA0.log");
             fw.write(st.toString());
@@ -158,14 +159,14 @@ public class DebugAnalyser {
     }
 
     public void handleIgnoreLine(String event, String eventData, String uniqueId, String line,
-                                 JsonGenerator generator, Scanner scanner) throws IOException {
+            JsonGenerator generator, Scanner scanner) throws IOException {
         if (event.equalsIgnoreCase("USER_DEBUG")) {
             handleSpecificNode(event, eventData, uniqueId, line, generator, scanner);
         }
     }
 
     public boolean handleSpecificNode(String event, String eventData, String uniqueId, String line,
-                                      JsonGenerator generator, Scanner scanner) {
+            JsonGenerator generator, Scanner scanner) {
         Helper helper = new Helper();
         helper.app = this;
         helper.callStack = callStack;
@@ -182,11 +183,15 @@ public class DebugAnalyser {
         return helper.needToProcess;
     }
 
-    public static void addEntryObject(JsonGenerator generator, String event, String eventData, int lineNumber) throws IOException {
+    public static void addEntryObject(JsonGenerator generator, String event, String eventData, int lineNumber)
+            throws IOException {
         generator.writeStartObject();
         generator.writeFieldName(event);
         generator.writeString(eventData);
-        generator.writeNumberField("ln", lineNumber);
+        if (lineNumber != 0) {
+
+            generator.writeNumberField("ln", lineNumber);
+        }
         generator.writeEndObject();
     }
 
@@ -195,16 +200,21 @@ public class DebugAnalyser {
         generator.writeEndObject();
     }
 
-    public static void startArrayObject(JsonGenerator generator, String event, String eventData, int lineNumber) throws IOException {
+    public static void startArrayObject(JsonGenerator generator, String event, String eventData, int lineNumber)
+            throws IOException {
         generator.writeStartObject();
-        generator.writeNumberField("ln", lineNumber);
+        if (lineNumber != 0) {
+            generator.writeNumberField("ln", lineNumber);
+        }
         generator.writeFieldName(event + " " + eventData);
         generator.writeStartArray();
     }
 
     public static void startArrayObject(JsonGenerator generator, String event, int lineNumber) throws IOException {
         generator.writeStartObject();
-        generator.writeNumberField("ln", lineNumber);
+        if (lineNumber != 0) {
+            generator.writeNumberField("ln", lineNumber);
+        }
         generator.writeFieldName(event);
         generator.writeStartArray();
     }
@@ -251,7 +261,7 @@ public class DebugAnalyser {
                 handleSpecificNode(event, eventText, uniqueId, line, this.generator, scanner);
             }
         } else {
-            // ANCHOR : process line which does not any event
+            // ANCHOR : process line which does not have any event
             DebugAnalyser.addEntryObject(this.generator, "text", line, 0);
         }
     }
