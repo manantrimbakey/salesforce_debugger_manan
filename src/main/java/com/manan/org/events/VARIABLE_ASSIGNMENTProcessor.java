@@ -10,7 +10,6 @@ public class VARIABLE_ASSIGNMENTProcessor extends EventProcessorClass {
 
     @Override
     public void execute() {
-        String line = "";
         Pattern p = eventVsPattern.get("VARIABLE_ASSIGNMENT");
         Matcher m = p.matcher(eventData);
         if (m.matches()) {
