@@ -27,8 +27,10 @@ public class RestServ {
         return result;
     }
 
-    @GetMapping(path = "/")
-    public Object greeting() {
-        return "greetings";
-    }
+    // @RequestMapping("/")
+    // public String welcome() {
+
+    //     return "greetings";
+    // }
+
 }
