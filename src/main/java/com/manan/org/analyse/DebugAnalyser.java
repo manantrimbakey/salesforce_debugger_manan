@@ -63,14 +63,16 @@ public class DebugAnalyser {
     }
 
     // public static void main(String[] args) {
-    //     try (FileWriter fw = new FileWriter(
-    //             new File("C:\\Users\\manan\\Desktop\\Desktop Files\\apex-07L9D000007G1DEUA0__json.json"))) {
-    //         DebugAnalyser da = new DebugAnalyser();
-    //         StringWriter st = da.analyseLog("C:\\Users\\manan\\Downloads\\apex-07L9D000007G1DEUA0.log");
-    //         fw.write(st.toString());
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
+    // try (FileWriter fw = new FileWriter(
+    // new File("C:\\Users\\manan\\Desktop\\Desktop
+    // Files\\apex-07L9D000007G1DEUA0__json.json"))) {
+    // DebugAnalyser da = new DebugAnalyser();
+    // StringWriter st =
+    // da.analyseLog("C:\\Users\\manan\\Downloads\\apex-07L9D000007G1DEUA0.log");
+    // fw.write(st.toString());
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
     // }
 
     public StringWriter analyseLog(String source) {
@@ -226,6 +228,10 @@ public class DebugAnalyser {
             String uniqueId = m.group(1);
             String event = m.group(2);
             String eventText = m.group(3);
+            // if (event.equalsIgnoreCase("FATAL_ERROR")) {
+            //     System.out.println("called-- fatal error");
+            //     return;
+            // } else 
             if (ignoreStack.size() > 0 && !(!event.isBlank() && ignoreStack.size() > 0
                     && REGEX_DATA.closingVsOpening.get(event) != null
                     && REGEX_DATA.closingVsOpening.get(event).equalsIgnoreCase(ignoreStack.peek()))) {

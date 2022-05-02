@@ -1,6 +1,8 @@
 package com.manan.org.server;
 
 import com.manan.org.analyse.DebugAnalyser;
+
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import java.io.StringWriter;
 import java.util.HashMap;
@@ -9,7 +11,7 @@ import java.util.HashMap;
 public class RestServ {
 
     @SuppressWarnings("unchecked")
-    @PostMapping(path = "/analyse", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/analyse", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
     public Object analyse(@RequestBody Object jsonData) {
         String result = "";
         try {
@@ -26,11 +28,4 @@ public class RestServ {
         }
         return result;
     }
-
-    // @RequestMapping("/")
-    // public String welcome() {
-
-    //     return "greetings";
-    // }
-
 }

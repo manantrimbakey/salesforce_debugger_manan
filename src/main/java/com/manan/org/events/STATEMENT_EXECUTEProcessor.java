@@ -25,7 +25,11 @@ public class STATEMENT_EXECUTEProcessor extends EventProcessorClass {
                     if (f.matches()) {
                         lineNumbers.append("," + f.group(1));
                     }
-                } else {
+                } 
+                // else if (b && v.group(2).equalsIgnoreCase("FATA_ERROR")) {
+                //     return;
+                // }
+                 else {
                     try {
                         DebugAnalyser.addEntryObject(generator, event, lineNumbers.toString(), 0);
                         app.process(line, scanner, generator);
