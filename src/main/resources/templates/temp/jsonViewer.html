@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Online JSON Formatter / Beautifier and JSON Validator will format JSON data, and helps to validate, convert JSON to XML, JSON to CSV. Save and Share JSON">
+    <meta name="author" content="JsonFormatter">
+    <meta name="keywords"
+        content="json formatter, json beautifier, json validator, online json formatter, json formatter online, json beautify,beautify json, ,format json, jsonlint, JSON Checker, JSON Cleaner, json converter, json format, json online format, format json online" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jsonformatter" />
+    <meta name="twitter:title" content="Best JSON Formatter and JSON Validator: Online JSON Formatter" />
+    <meta name="twitter:description"
+        content="Online JSON Formatter / Beautifier and JSON Validator will format JSON data, and helps to validate, convert JSON to XML, JSON to CSV. Save and Share JSON" />
+    <meta name="twitter:image" content="https://jsonformatter.org/img/rectlogo.png" />
+    <meta name="twitter:url" content="https://jsonformatter.org/">
+    <meta name="twitter:creator" content="@jsonformatter">
+    <meta name='ir-site-verification-token' value='600428248' />
+    <meta property="og:title" content="Best JSON Formatter and JSON Validator: Online JSON Formatter" />
+    <meta property="og:description"
+        content="Online JSON Formatter / Beautifier and JSON Validator will format JSON data, and helps to validate, convert JSON to XML, JSON to CSV. Save and Share JSON" />
+    <meta property="og:image" content="https://jsonformatter.org/img/rectlogo.png" />
+    <meta property="og:url" content="https://jsonformatter.org/" />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://jsonformatter.org/" />
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.png" />
+    <title>Best JSON Formatter and JSON Validator: Online JSON Formatter</title>
+    <link href="https://plus.google.com/108734869867956898267/posts" rel="publisher" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/dist/3.4/css/jsonmain.css" rel="stylesheet">
+    <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+</head><input type="hidden" id="viewname" value="index"><input type="hidden" id="type" value="json">
+
+<body id="page-top" class="index">
+    <script> (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-69019558-1', 'auto'); ga('send', 'pageview');</script>
+    <input id="default_file" type="file" name="userfile" />
+    <div id="pluswrap" class='hide'>
+        <div class="plus"><button class="btn btn-lg btn-success"><i class="fa fa-cog fa-spin"></i></button></div>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header page-scroll"><button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="/img/logo.webp"
+                        width="249px" height="39px" alt="JSON Formatter" title="JSON Formatter"></a></div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="page-scroll"><a href="https://codebeautify.org/jsonviewer" rel="noopener"
+                            title="JSON Beautifier" target="_blank">JSON Beautifier</a></li>
+                    <li class="page-scroll hidden-sm"><a href="/json-parser" title="JSON Parser">JSON Parser</a></li>
+                    <li class="page-scroll hidden-sm"><a href="/xml-formatter" title="XML Formatter">XML Formatter</a>
+                    </li>
+                    <li class="page-scroll hidden-sm"><a href="/jsbeautifier" title="JSBeautifier">JSBeautifier</a></li>
+                    <li id="savelink" class="page-scroll"><a href="#save" onclick="Action_Save();">Save</a></li>
+                    <li class="page-scroll hidden-sm"><a href="/recentLinksPage/json">Recent Links</a></li>
+                    <li id="loginDiv" class="page-scroll"><a href="#" onclick="preLogin();" title="New Login">Login</a>
+                    </li><a data-toggle="dropdown" href="/#">
+                        <li id="loginDropdown" class="dropdown cursor-pointer"><span id="loggedUserName"></span><span
+                                class="caret"></span>
+                            <ul class="dropdown-menu">
+                                <li><a target="_blank" href="/userSaveLinkPage/json">My Links</a></li>
+                                <li><a href="/#" onclick="preLogout();">Logout</a></li>
+                            </ul>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="flymessage" class="alert alert-danger flyover flyover-bottom">
+        <p> Copied to Clipboard </p>
+    </div>
+    <header>
+        <div class="container container-no-padding">
+            <div class="row" id="headerDiv">
+                <div class="col-sm-8" id="msgDiv" style="float: right;"></div>
+            </div>
+            <div class="row">
+                <div id="inputdiv" class="col-lg-5">
+                    <div id="inputeditor" tabindex="-1" class="jsoneditor-manual"></div>
+                </div>
+                <div class="col-lg-2"><button type="button" class="btn btn-xs btn-outline btn-block"
+                        href="#loadFileDialog" data-toggle="modal" onclick="clearInput('loadFileDialog')"
+                        title="JSON URL or Browse File">Upload Data</button><br><button type="button"
+                        class="btn btn-xs btn-outline btn-block" onclick="validateJSON();"
+                        title="JSON Validator">Validate</button><br>
+                    <div class="form-group"><select class="form-control" id="sel1">
+                            <option value="2" selected="selected">2 Tab Space</option>
+                            <option value="3">3 Tab Space</option>
+                            <option value="4">4 Tab Space</option>
+                        </select></div><button type="button" id="defaultaction" class="btn btn-xs btn-outline btn-block"
+                        onclick="beautifyJSON();" title="JSON Formatter">Format / Beautify</button>
+                    <div class="ads" style="text-align:center;padding-top:10px;margin-left:-10px">
+                        <script async
+                            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4125058781634690"
+                            crossorigin="anonymous"></script><ins class="adsbygoogle"
+                            style="display:inline-block;width:200px;height:200px"
+                            data-ad-client="ca-pub-4125058781634690" data-ad-slot="8168901167"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div> <button type="button" class="btn btn-xs btn-outline btn-block" onclick="minifyJSON();"
+                        title="JSON Minify or JSON Compact">Minify / Compact</button><br>
+                    <div class="dropdown"><button class="btn btn-xs btn-outline btn-block dropdown-toggle" type="button"
+                            data-toggle="dropdown">Convert JSON to<span class="caret"></span></button>
+                        <ul class="btn btn-xs btn-outline btn-block dropdown-menu" style="background:#fff !important">
+                            <li><a href="#" onclick="jsonToxml();">JSON to XML</a></li>
+                            <li><a href="#" onclick="jsonTocsv();">JSON to CSV</a></li>
+                            <li><a href="#" onclick="jsonToyaml();">JSON to YAML</a></li>
+                        </ul>
+                    </div><br><button type="button" class="btn btn-xs btn-outline btn-block hidden-xs"
+                        onclick="download();" title="JSON Download">Download</button><br />
+                    <p class="text-center"><a style="color:black;font-size: 16px;"
+                            href="https://codebeautify.org/blog/json-full-form/" rel="noopener" target="_blank">JSON
+                            Full Form</a></p>
+                </div>
+                <div id="outputdiv" class="col-lg-5">
+                    <div id="outputeditor" tabindex="-1" class="jsoneditor-manual"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+ 
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script async src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <script src='/dist/3.4/js/jsontools-min.js'></script>
+    <script></script>
+</body>
+
+</html>
