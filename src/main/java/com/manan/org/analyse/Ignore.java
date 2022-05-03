@@ -14,7 +14,7 @@ public class Ignore {
         this.ignores.add("SYSTEM_CONSTRUCTOR_ENTRY");
         this.ignores.add("SYSTEM_CONSTRUCTOR_EXIT");
         this.ignores.add("HEAP_ALLOCATE");
-        // this.ignores.add("STATEMENT_EXECUTE");
+        this.ignores.add("STATEMENT_EXECUTE");
         // this.ignores.add("VARIABLE_ASSIGNMENT");
         this.ignores.add("VARIABLE_SCOPE_BEGIN");
         this.ignores.add("Database.QueryLocator.iterator()");

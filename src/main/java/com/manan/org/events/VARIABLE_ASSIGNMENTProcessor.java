@@ -14,7 +14,7 @@ public class VARIABLE_ASSIGNMENTProcessor extends EventProcessorClass {
         Matcher m = p.matcher(eventData);
         if (m.matches()) {
             Integer ln = Integer.parseInt(m.group(1));
-            String eventText = m.group(2) + "<-" + m.group(3);
+            String eventText = m.group(2) + " <= " + m.group(3);
             try {
                 DebugAnalyser.addEntryObject(generator, event, eventText, ln);
                 return;
