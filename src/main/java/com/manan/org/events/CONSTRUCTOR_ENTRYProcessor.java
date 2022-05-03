@@ -17,7 +17,8 @@ public class CONSTRUCTOR_ENTRYProcessor extends EventProcessorClass {
                 } catch (NumberFormatException ignored) {
 
                 }
-                DebugAnalyser.startArrayObject(generator,event,m.group(3), ln);
+                resultantEventData = m.group(3);
+                DebugAnalyser.startArrayObject(generator, event, resultantEventData, ln);
                 needToProcess = true;
             } catch (NumberFormatException e) {
                 // just ignore exception
@@ -25,6 +26,10 @@ public class CONSTRUCTOR_ENTRYProcessor extends EventProcessorClass {
                 e.printStackTrace();
             }
         }
+    }
+
+    public CONSTRUCTOR_ENTRYProcessor() {
+        isUpdateStackAtOpening = true;
     }
 
 }

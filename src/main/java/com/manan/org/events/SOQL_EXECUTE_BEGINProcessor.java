@@ -25,7 +25,7 @@ public class SOQL_EXECUTE_BEGINProcessor extends EventProcessorClass {
                 }
                 soql = m.group(2);
                 DebugAnalyser.startArrayObject(generator, event, soql, lineNumber);
-                String methodCall = json.toJson(eventStack) + "!@#$" + lineNumber;
+                String methodCall = json.toJson(callStack) + "<--LineNummber-->" + lineNumber;
                 if (soqlStatementVsCount.get(methodCall) != null) {
                     int count = soqlStatementVsCount.get(methodCall);
                     count += 1;

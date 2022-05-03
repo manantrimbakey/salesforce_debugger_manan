@@ -18,8 +18,8 @@ public class DML_BEGINProcessor extends EventProcessorClass {
                 } catch (NumberFormatException e) {
                     // just ignore
                 }
-//                node.setData(m.group(2) + " operation on " + m.group(4) + " records of object " + m.group(3));
-                DebugAnalyser.startArrayObject(generator, m.group(2) + " operation on " + m.group(4) + " records of object " + m.group(3), ln);
+                resultantEventData = m.group(2) + " operation on " + m.group(4) + " records of object " + m.group(3);
+                DebugAnalyser.startArrayObject(generator, resultantEventData, ln);
                 needToProcess = true;
 
             }

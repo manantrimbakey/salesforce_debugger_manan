@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.*;
@@ -107,6 +106,7 @@ public class DebugAnalyser {
             this.process(scanner);
             generator.writeEndArray();
             generator.writeEndObject();
+            // addEntryObject(generator, "soqlCount", ""+soqlStatementVsCount, 0);
             generator.close();
             return jsonObjectWriter;
         } catch (Exception e) {
@@ -228,10 +228,6 @@ public class DebugAnalyser {
             String uniqueId = m.group(1);
             String event = m.group(2);
             String eventText = m.group(3);
-            // if (event.equalsIgnoreCase("FATAL_ERROR")) {
-            //     System.out.println("called-- fatal error");
-            //     return;
-            // } else 
             if (ignoreStack.size() > 0 && !(!event.isBlank() && ignoreStack.size() > 0
                     && REGEX_DATA.closingVsOpening.get(event) != null
                     && REGEX_DATA.closingVsOpening.get(event).equalsIgnoreCase(ignoreStack.peek()))) {
@@ -254,6 +250,7 @@ public class DebugAnalyser {
                     // ANCHOR : handle ignored lines
                 }
             } else if (matchToken(event, eventText, OPENING_TOKENS)) {
+                
                 // ANCHOR : if event is any event opening tag
                 if (handleSpecificNode(event, eventText, uniqueId, line, this.generator, scanner)) {
                     this.process(scanner);

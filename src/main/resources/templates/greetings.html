@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Change your log into JSON :: Salesforce Debugger</title>
     <script>
       var doPost = function () {
         let xhr = new XMLHttpRequest();
@@ -10,7 +10,11 @@
         xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        xhr.onload = () => console.log(xhr.responseText);
+        xhr.onload = function () {
+          let jsonResponse = xhr.responseText;
+          let reponseTextBlock = document.getElementById("resultLog");
+          reponseTextBlock.value = jsonResponse;
+        };
 
         let log = document.getElementById("rawLog");
         let rawLog = log.value;
@@ -21,6 +25,9 @@
   </head>
   <body>
     <textarea id="rawLog" name="rawLog" cols="150" rows="10"> </textarea>
+    <br />
     <button onclick="doPost();" id="submitButton">Submit</button>
+    <br />
+    <textarea id="resultLog" name="resultLog" cols="150" rows="10"> </textarea>
   </body>
 </html>

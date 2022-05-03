@@ -48,7 +48,7 @@ public class Helper {
 
     public void updateStack(String event, String eventData, EventProcessorClass processor) {
         if (processor.isUpdateStackAtOpening) {
-            callStack.push(eventData);
+            callStack.push(eventData.isBlank() ? event : eventData);
             eventStack.push(event);
         } else if (processor.isUpdateStackAtClosing) {
             if (eventStack.size() > 0 && callStack.size() > 0) {
