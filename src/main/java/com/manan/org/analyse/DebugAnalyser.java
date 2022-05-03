@@ -62,19 +62,6 @@ public class DebugAnalyser {
         }
     }
 
-    // public static void main(String[] args) {
-    // try (FileWriter fw = new FileWriter(
-    // new File("C:\\Users\\manan\\Desktop\\Desktop
-    // Files\\apex-07L9D000007G1DEUA0__json.json"))) {
-    // DebugAnalyser da = new DebugAnalyser();
-    // StringWriter st =
-    // da.analyseLog("C:\\Users\\manan\\Downloads\\apex-07L9D000007G1DEUA0.log");
-    // fw.write(st.toString());
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-
     public StringWriter analyseLog(String source) {
         File sourceFile = new File(source);
         try (Scanner scanner = new Scanner(sourceFile)) {
