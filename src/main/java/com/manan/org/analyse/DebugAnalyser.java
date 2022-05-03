@@ -17,6 +17,7 @@ public class DebugAnalyser {
     public static ArrayList<String> IGNORE_LIST;
     public static Map<String, Pattern> eventVsPattern;
     public static Pattern masterPattern;
+    public static int openArray = 0;
 
     /**
      * [\d]{1,3}:[\d]{1,3}:[\d]{1,3}.[\d]{1,3}\s*\((\d+)\)\|([\da-zA-z]+)(.*)
@@ -83,8 +84,10 @@ public class DebugAnalyser {
             generator.writeStartObject();
             generator.writeFieldName("log");
             generator.writeStartArray();
+            openArray++;
             this.process(scanner);
             generator.writeEndArray();
+            openArray--;
             generator.writeEndObject();
             generator.close();
             return jsonObjectWriter;
@@ -103,10 +106,12 @@ public class DebugAnalyser {
             generator.writeStartObject();
             generator.writeFieldName("log");
             generator.writeStartArray();
+            openArray++;
             this.process(scanner);
             generator.writeEndArray();
+            openArray--;
             generator.writeEndObject();
-            // addEntryObject(generator, "soqlCount", ""+soqlStatementVsCount, 0);
+            addEntryObject(generator, "arrayCount", ""+openArray, 0);
             generator.close();
             return jsonObjectWriter;
         } catch (Exception e) {
@@ -199,6 +204,7 @@ public class DebugAnalyser {
 
     public static void endArrayObject(JsonGenerator generator) throws IOException {
         generator.writeEndArray();
+        openArray--;
         generator.writeEndObject();
     }
 
@@ -210,6 +216,7 @@ public class DebugAnalyser {
         }
         generator.writeFieldName(event + " " + eventData);
         generator.writeStartArray();
+        openArray++;
     }
 
     public static void startArrayObject(JsonGenerator generator, String event, int lineNumber) throws IOException {
@@ -219,6 +226,7 @@ public class DebugAnalyser {
         }
         generator.writeFieldName(event);
         generator.writeStartArray();
+        openArray++;
     }
 
     public void process(String line, Scanner scanner, JsonGenerator generator) throws Exception {

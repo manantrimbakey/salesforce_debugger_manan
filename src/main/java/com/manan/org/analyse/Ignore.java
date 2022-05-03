@@ -24,5 +24,6 @@ public class Ignore {
         this.ignores.add("SYSTEM_MODE_EXIT");
         this.ignores.add("System.JSON.deserialize(String, System.Type)");
         this.ignores.add("GlobalConstants");
+        this.ignores.add("USER_DEBUG");
     }
 }
