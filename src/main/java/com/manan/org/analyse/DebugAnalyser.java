@@ -104,6 +104,7 @@ public class DebugAnalyser {
             StringWriter jsonObjectWriter = new StringWriter();
             generator = factory.createGenerator(jsonObjectWriter);
             generator.writeStartObject();
+            generator.writeStartObject();
             generator.writeFieldName("log");
             generator.writeStartArray();
             openArray++;
@@ -111,7 +112,8 @@ public class DebugAnalyser {
             generator.writeEndArray();
             openArray--;
             generator.writeEndObject();
-            addEntryObject(generator, "arrayCount", ""+openArray, 0);
+            addEntryObject(generator, "arrayCount", "" + openArray, 0);
+            generator.writeEndObject();
             generator.close();
             return jsonObjectWriter;
         } catch (Exception e) {
@@ -258,7 +260,7 @@ public class DebugAnalyser {
                     // ANCHOR : handle ignored lines
                 }
             } else if (matchToken(event, eventText, OPENING_TOKENS)) {
-                
+
                 // ANCHOR : if event is any event opening tag
                 if (handleSpecificNode(event, eventText, uniqueId, line, this.generator, scanner)) {
                     this.process(scanner);
