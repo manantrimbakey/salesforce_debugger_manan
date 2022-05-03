@@ -104,15 +104,14 @@ public class DebugAnalyser {
             StringWriter jsonObjectWriter = new StringWriter();
             generator = factory.createGenerator(jsonObjectWriter);
             generator.writeStartObject();
-            generator.writeStartObject();
             generator.writeFieldName("log");
             generator.writeStartArray();
             openArray++;
             this.process(scanner);
             generator.writeEndArray();
             openArray--;
-            generator.writeEndObject();
-            addEntryObject(generator, "arrayCount", "" + openArray, 0);
+            generator.writeFieldName("arrayCount");
+            generator.writeString("" + openArray);
             generator.writeEndObject();
             generator.close();
             return jsonObjectWriter;

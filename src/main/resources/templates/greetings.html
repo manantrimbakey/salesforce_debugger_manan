@@ -18,7 +18,9 @@
 
         let log = document.getElementById("rawLog");
         let rawLog = log.value;
-        let data = { data: rawLog };
+        let data = {
+          data: rawLog,
+        };
         xhr.send(JSON.stringify(data));
       };
     </script>
