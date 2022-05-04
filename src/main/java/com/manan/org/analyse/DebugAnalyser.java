@@ -99,6 +99,8 @@ public class DebugAnalyser {
             openArray--;
             generator.writeFieldName("arrayCount");
             generator.writeString("" + openArray);
+            generator.writeFieldName("SoqlCount");
+            generator.writeString("" + soqlStatementVsCount);
             generator.writeEndObject();
             generator.close();
             return jsonObjectWriter;
