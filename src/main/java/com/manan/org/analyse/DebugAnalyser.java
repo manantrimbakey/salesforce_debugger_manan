@@ -33,6 +33,7 @@ public class DebugAnalyser {
     public ArrayList<String> exceptionsList;
     public JsonGenerator generator;
     public ArrayList<String> exceptions;
+    public String previousEvent;
 
     static {
         OPENING_TOKENS = new Opening().openers;
@@ -50,6 +51,7 @@ public class DebugAnalyser {
         exceptionsList = new ArrayList<>();
         logFileScanner = null;
         exceptions = new ArrayList<>();
+        previousEvent = "";
     }
 
     private static void initPatterns() {
@@ -170,6 +172,7 @@ public class DebugAnalyser {
         helper.soqlStatementVsCount = soqlStatementVsCount;
         helper.generator = generator;
         helper.eventVsPattern = eventVsPattern;
+        helper.previousEvent = previousEvent;
         helper.processEvent();
         return helper.needToProcess;
     }
@@ -241,13 +244,15 @@ public class DebugAnalyser {
             } else if (matchToken(event, eventText, OPENING_TOKENS)) {
 
                 // ANCHOR : if event is any event opening tag
+                previousEvent = event;
 
             } else if (matchToken(event, eventText, CLOSING_TOKENS)) {
                 // ANCHOR : if event is any event closing tag
+                previousEvent = event;
 
             } else {
                 // ANCHOR : if event is not any opening and closing tag
-
+                previousEvent = event;
             }
         } else {
             // ANCHOR : process line which does not have any event

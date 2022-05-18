@@ -19,6 +19,7 @@ public class Helper {
     public ArrayList<String> exceptions = new ArrayList<>();
     public Boolean needToProcess;
     public JsonGenerator generator;
+    public String previousEvent;
 
     public void processEvent() {
         EventProcessorClass process;
@@ -35,6 +36,7 @@ public class Helper {
             process.event = event;
             process.eventData = eventData;
             process.eventVsPattern = eventVsPattern;
+            process.previousEvent = previousEvent;
             process.execute();
             needToProcess = process.needToProcess;
             if (needToProcess) {

@@ -26,7 +26,8 @@ public class EventProcessorClass {
     public String event;
     public String eventData;
     public String fullString;
-    public Map<String,Pattern> eventVsPattern;
+    public Map<String, Pattern> eventVsPattern;
+    public String previousEvent;
 
     public String getResultantEventData() {
         return resultantEventData;
