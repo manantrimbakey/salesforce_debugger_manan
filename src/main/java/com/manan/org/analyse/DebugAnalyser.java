@@ -71,10 +71,8 @@ public class DebugAnalyser {
             generator.writeStartObject();
             generator.writeFieldName("log");
             generator.writeStartArray();
-            openArray++;
             this.process(scanner);
             generator.writeEndArray();
-            openArray--;
             generator.writeEndObject();
             generator.close();
             return jsonObjectWriter;
@@ -93,12 +91,8 @@ public class DebugAnalyser {
             generator.writeStartObject();
             generator.writeFieldName("log");
             generator.writeStartArray();
-            openArray++;
             this.process(scanner);
             generator.writeEndArray();
-            openArray--;
-            generator.writeFieldName("arrayCount");
-            generator.writeString("" + openArray);
             generator.writeFieldName("SoqlCount");
             generator.writeString("" + soqlStatementVsCount);
             generator.writeEndObject();
@@ -194,7 +188,6 @@ public class DebugAnalyser {
 
     public static void endArrayObject(JsonGenerator generator) throws IOException {
         generator.writeEndArray();
-        openArray--;
         generator.writeEndObject();
     }
 
@@ -206,7 +199,6 @@ public class DebugAnalyser {
         }
         generator.writeFieldName(event + " " + eventData);
         generator.writeStartArray();
-        openArray++;
     }
 
     public static void startArrayObject(JsonGenerator generator, String event, int lineNumber) throws IOException {
@@ -216,7 +208,6 @@ public class DebugAnalyser {
         }
         generator.writeFieldName(event);
         generator.writeStartArray();
-        openArray++;
     }
 
     public void process(String line, Scanner scanner, JsonGenerator generator) throws Exception {
