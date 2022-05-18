@@ -35,6 +35,7 @@ public class DebugAnalyser {
     public ArrayList<String> exceptions;
 
     static {
+        openArray = 0;
         OPENING_TOKENS = new Opening().openers;
         CLOSING_TOKENS = new Closure().closures;
         IGNORE_LIST = new Ignore().ignores;
@@ -50,6 +51,7 @@ public class DebugAnalyser {
         exceptionsList = new ArrayList<>();
         logFileScanner = null;
         exceptions = new ArrayList<>();
+        openArray = 0;
     }
 
     private static void initPatterns() {
