@@ -241,16 +241,13 @@ public class DebugAnalyser {
             } else if (matchToken(event, eventText, OPENING_TOKENS)) {
 
                 // ANCHOR : if event is any event opening tag
-                if (handleSpecificNode(event, eventText, uniqueId, line, this.generator, scanner)) {
-                    this.process(scanner);
-                }
+
             } else if (matchToken(event, eventText, CLOSING_TOKENS)) {
                 // ANCHOR : if event is any event closing tag
-                handleSpecificNode(event, eventText, uniqueId, line, this.generator, scanner);
-                return;
+
             } else {
                 // ANCHOR : if event is not any opening and closing tag
-                handleSpecificNode(event, eventText, uniqueId, line, this.generator, scanner);
+
             }
         } else {
             // ANCHOR : process line which does not have any event

@@ -1,17 +1,12 @@
 package com.manan.org.events;
 
-import com.manan.org.analyse.DebugAnalyser;
 import com.manan.org.analyse.EventProcessorClass;
+
+import java.util.Map;
+import java.util.regex.Pattern;
 
 public class EXECUTION_FINISHEDProcessor extends EventProcessorClass {
 
-    public void execute() {
-        try {
-            DebugAnalyser.endArrayObject(generator);
-            isUpdateStackAtClosing = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+ 
 
 }
